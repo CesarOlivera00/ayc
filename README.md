@@ -1,3 +1,8 @@
+AYC => Arm Your Computer
+Consiste en una aplicacion e-commerce en la cual se podra armar una computadora 100% completa. La aplicacion guia al usuario con o sin conocimientos 
+para armar una computadora componente por componente.
+Esta e-commerce tambien te permitirá comprar componentes separados, y hasta crear una computadora aleatoria de acuerdo a tus necesidades y presupuesto disponible.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
