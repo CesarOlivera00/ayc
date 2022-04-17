@@ -5,10 +5,10 @@ class TopNavBar extends Component {
         return (
             <nav>
                 <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    <li>Item 3</li>
-                    <li>Item 4</li>
+                    <li>Catalogo</li>
+                    <li>Nosotros</li>
+                    <li>Contacto</li>
+                    <li>Iniciar Sesion</li>
                 </ul>
             </nav>
         );
