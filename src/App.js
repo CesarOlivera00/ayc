@@ -8,7 +8,7 @@ function App() {
     return (
         <>
             <TopNavBar title="A Y C" />
-            <ItemListContainer cant="3" name="Cesar" />
+            <ItemListContainer />
             <div style={{textAlign: "center"}}>
                 <button className="btn btn-active btn-accent" style={{color: "white"}}>Boton</button>
             </div>

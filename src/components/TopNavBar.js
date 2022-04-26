@@ -1,18 +1,40 @@
+import { useState, useEffect } from "react";
+
 // Componente de nav bar superior.
 let styleTopNavBar = {
     color: "white",
 }
 
 const TopNavBar = (props) => {
+    const [num, SetNum] = useState(3);
+
+    useEffect(() => {
+        console.log("Efecto");
+    });
+
+    useEffect(() => {
+        console.log("Efecto en el montaje");
+    }, []);
+
+    useEffect(() => {
+        console.log("Efecto en el cambio de num");
+    }, [num]);
+
+    const onClickHandler = () => {
+        console.log("Click onClickHandler");
+        SetNum(num + 1);
+    };
+
     return (
         <nav className="navbar bg-base-100 bg-accent-focus" style={styleTopNavBar}>
             <div className="flex-none">
                 <button className="btn btn-square btn-ghost">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
             <div className="flex-1">
-                <button href="#" className="btn btn-ghost normal-case text-xl">{props.title}</button>
+                <button className="btn btn-ghost normal-case text-xl" onClick={onClickHandler}>{props.title}</button>
+                {num}
             </div>
             <div className="flex-none">
                 <button className="btn btn-square btn-ghost">

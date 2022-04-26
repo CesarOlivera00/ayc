@@ -1,37 +1,33 @@
-let styleTable = {
+import { useState, useEffect } from "react";
+import { peripherals as peripheralsData } from "../data/peripherals";
+
+import ItemList from '../components/ItemList';
+
+let styleContainer = {
     margin: "10px"
 }
 
-const ItemListContainer = (props) => {
-    let rowArray = [];
-    let count = parseInt(props.cant);
+const ItemListContainer = () => {
+    const [peripherals, SetPerispherals] = useState([]);
 
-    console.log(count);
+    useEffect(() => {
+        console.log("Effect: Cargar los perisfericos");
+
+        const GetPerispherals = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(peripheralsData);
+            }, 0);
+        });
+
+        GetPerispherals.then((result) => {
+            console.log("Se obtuvieron los perisfericos");
+            console.log(result);
+        });
+    });
     
-    for (let i = 0; i < count; i++) {
-        let row = (
-            <tr>
-                <th>{i + 1}</th>
-                <td>Hola {props.name}</td>
-            </tr>
-        );
-
-        rowArray.push(row);
-    }
-
     return (
-        <div className="overflow-x-auto" style={styleTable}>
-            <table className="table w-full">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rowArray}
-                </tbody>
-            </table>
+        <div style={styleContainer}>
+            <ItemList items={peripheralsData}></ItemList>
         </div>
     );
 }
