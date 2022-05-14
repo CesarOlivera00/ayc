@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom"
+import { useState, useEffect, useContext } from "react";
+import { Link, useParams } from "react-router-dom";
 import { peripherals as peripheralsData } from "../data/peripherals";
+import { DarkModeContext } from "../context/darkModeContext";
 
 import ItemList from '../components/ItemList';
 
@@ -9,10 +10,10 @@ let styleContainer = {
 }
 
 const ItemListContainer = () => {
+    const isDarkMode = useContext(DarkModeContext);
+
     const { categoryId } = useParams()
     const [peripherals, SetPerispherals] = useState([]);
-
-    console.log("Este es el CategoryID: " + categoryId);
 
     useEffect(() => {
         console.log("Effect: Cargar los perisfericos");
@@ -38,6 +39,7 @@ const ItemListContainer = () => {
     return (
         <div style={styleContainer}>
             <ItemList items={peripheralsParam}></ItemList>
+            <strong>{ "Modo oscuro: " + (isDarkMode ? "activado" : "desactivado") }</strong>
         </div>
     );
 }
