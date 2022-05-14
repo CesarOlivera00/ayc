@@ -30,7 +30,7 @@ const ItemDetail = () => {
             <strong className="p-2">{peripheral.name}</strong>
             <strong className="p-2">{peripheral.description}</strong>
             <div className="m-5">
-            <Link to='/peripheral/1'>Perisferico</Link>
+                <Link to='/peripheral/1'>Perisferico</Link>
             </div>
         </>
     )
