@@ -18,7 +18,7 @@ const ProductItem = (props) => {
                 <h2 className="card-title">{props.price.toString()}</h2>
                 <p>{props.name}</p>
                 <div className="card-actions justify-end">
-                    <a href={"/peripheral/" + props.idComponent} className="btn btn-primary">Comprar Ahora</a>
+                    <a href={"/product/" + props.idComponent} className="btn btn-primary">Comprar Ahora</a>
                 </div>
             </div>
         </div>
