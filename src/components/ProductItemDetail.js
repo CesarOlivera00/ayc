@@ -2,11 +2,14 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { productos as productosData } from "../data/productos";
 
-const ProductItemDetail = () => {
-    const { peripheralId } = useParams()
-    const [peripheral, SetPerispheral] = useState({})
+import ItemCount from './ItemCount';
 
-    useEffect( () => {
+const ProductItemDetail = () => {
+    const { peripheralId } = useParams();
+    const [peripheral, SetPerispheral] = useState({});
+    const [countProducts, setCountProducts] = useState(0);
+
+    useEffect(() => {
         (async () => {
             const getPeripheralDetail = () => {
                 return new Promise((resolve) => {
@@ -24,6 +27,12 @@ const ProductItemDetail = () => {
         })()
     }, [peripheralId]);
 
+    // Funcion para el contador
+    const onAdd = (count) => {
+        console.log("Producto agregado al carrito: " + count.toString());
+        setCountProducts(count);
+    }
+
     return (
         <>
             <div>Perisferico Detalle - {peripheralId}</div>
@@ -33,6 +42,7 @@ const ProductItemDetail = () => {
             <div className="m-5">
                 <Link to='/peripheral/1'>Perisferico</Link>
             </div>
+            { countProducts === 0 ? <ItemCount stock={10} initial={1} onAdd={onAdd}></ItemCount> : <span>Producto agregado al carrito</span> }
         </>
     )
 }
