@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { peripherals as peripheralsData } from "../data/peripherals";
+import { productos as productosData } from "../data/productos";
 
-const ItemDetail = () => {
+const ProductItemDetail = () => {
     const { peripheralId } = useParams()
-    const [peripheral, SetPerispheral] = useState( {} )
+    const [peripheral, SetPerispheral] = useState({})
 
     useEffect( () => {
         (async () => {
-            const peripheralData = await getPeripheralDetail();
-            if (peripheralData) {
-                SetPerispheral(peripheralData);
+            const getPeripheralDetail = () => {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve(productosData.find(p => p.id === parseInt(peripheralId)));
+                    }, 1000);
+                })
+            }
+
+            const productoData = await getPeripheralDetail();
+            
+            if (productoData) {
+                SetPerispheral(productoData);
             }
         })()
     }, [peripheralId]);
-
-    const getPeripheralDetail = () => {
-        return new Promise( (resolve) => {
-            setTimeout(() => {
-                resolve(peripheralsData.find(p => p.id == peripheralId));
-            }, 1000);
-        })
-    }
 
     return (
         <>
@@ -35,4 +36,4 @@ const ItemDetail = () => {
         </>
     )
 }
-export default ItemDetail
+export default ProductItemDetail
