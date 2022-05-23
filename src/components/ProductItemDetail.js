@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom"
 import { productos as productosData } from "../data/productos";
 
 import ItemCount from './ItemCount';
-import {useContext } from 'react';
+import { useContext } from 'react';
 import CartContext from '../context/CartContext';
 
 const ProductItemDetail = () => {
@@ -47,7 +47,7 @@ const ProductItemDetail = () => {
             <div className="m-5">
                 <Link to='/product/1'>Perisferico</Link>
             </div>
-            { countProducts === 0 ? <ItemCount stock={10} initial={1} onAdd={onAdd}></ItemCount> : <span>Producto agregado al carrito</span> }
+            { countProducts === 0 ? <ItemCount stock={10} initial={1} onAdd={onAdd}></ItemCount> : <Link to="/cart">Ver Carrito</Link> }
         </>
     )
 }

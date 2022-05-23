@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 let styleItem = {
     display: "inline-block",
     margin: "10px",
@@ -18,7 +20,7 @@ const ProductItem = (props) => {
                 <h2 className="card-title">{props.price.toString()}</h2>
                 <p>{props.name}</p>
                 <div className="card-actions justify-end">
-                    <a href={"/product/" + props.idComponent} className="btn btn-primary">Comprar Ahora</a>
+                    <Link to={"/product/" + props.idComponent} className="btn btn-primary">Comprar Ahora</Link>
                 </div>
             </div>
         </div>

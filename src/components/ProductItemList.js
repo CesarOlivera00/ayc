@@ -6,11 +6,9 @@ let styleListItem = {
 }
 
 const ProductItemList = (props) => {
-    let itemList = props.items.map((item) => <ProductItem idComponent={item.id} name={item.name} price={item.price} urlImage={item.urlImage}></ProductItem> );
-
     return (
         <div style={styleListItem}>
-            {itemList}
+            {props.items.map((item) => <ProductItem key={item.id} idComponent={item.id} name={item.name} price={item.price} urlImage={item.urlImage}></ProductItem> )}
         </div>
     );
 };

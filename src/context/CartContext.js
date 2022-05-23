@@ -7,14 +7,18 @@ export function CartContextProvider({children}) {
     const [cart, setCart] = useState([]);
 
     const addToCart = (item, cant) => {
-        const newItem = {...item, cant};
-        setCart(...cart, newItem);
+        let newItem = {...item, cant};
+        let newArray = cart;
+        newArray.push(newItem);
+
+        setCart(newArray);
+
         console.log("se agrego el producto al carrito");
-        console.log(newItem);
+        console.log(cart);
     }
 
     return (
-        <Provider value={{ addToCart }}>
+        <Provider value={{ addToCart, cart }}>
             {children}
         </Provider>
     )

@@ -14,11 +14,11 @@ const ItemCount = (props) => {
     return (
         <div>
             <div>
-                <button class="btn btn-active btn-primary" onClick={handleAdd}>+</button>
+                <button className="btn btn-active btn-primary" onClick={handleAdd}>+</button>
                 <span>{count}</span>
-                <button class="btn btn-active btn-primary" onClick={handleSubstract}>-</button>
+                <button className="btn btn-active btn-primary" onClick={handleSubstract}>-</button>
             </div>
-            <button class="btn btn-active btn-primary" onClick={() => props.onAdd(count)}>Agregar al Carrito</button>
+            <button className="btn btn-active btn-primary" onClick={() => props.onAdd(count)}>Agregar al Carrito</button>
         </div>
     );
 };

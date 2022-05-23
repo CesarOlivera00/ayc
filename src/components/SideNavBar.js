@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 let styleDiv = {
     position: "absolute",
     height: "calc(100% - 64px)",
@@ -24,9 +26,10 @@ const SideNavBar = (props) => {
     return (
         <div style={{...styleDiv, ...styleVisible}}>
             <ul className="menu menu-compact lg:menu-normal w-56 p-2" style={styleUl}>
-                <li><a href="/">Todo</a></li>
-                <li><a href="/category/1">Teclados</a></li>
-                <li><a href="/category/2">Mouses</a></li>
+                <li><Link to="/">Todo</Link></li>
+                <li><Link to="/category/1">Teclados</Link></li>
+                <li><Link to="/category/2">Mouses</Link></li>
+                <li><Link to="/cart">Ver Carrito</Link></li>
             </ul>
         </div>
     );
