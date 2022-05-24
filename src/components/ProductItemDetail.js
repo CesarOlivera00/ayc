@@ -5,6 +5,24 @@ import { useContext } from 'react';
 import { GetPeripherals } from "../data/firebase/firebase";
 import CartContext from '../context/CartContext';
 
+let styleTitleProduct = {
+    fontSize: "30px",
+    fontWeight: "500",
+    marginTop: "20px"
+}
+
+let styleDescriptionProduct = {
+    minHeight: "100px"
+}
+
+let styleImage = {
+    height: "200px",
+    margin: "auto"
+}
+
+
+const componentsImages = require.context("../assets/images", true);
+
 const ProductItemDetail = () => {
     const { productId } = useParams();
     const [product, SetProduct] = useState({});
@@ -22,23 +40,6 @@ const ProductItemDetail = () => {
                 }
             });
         }, 1000);
-        /*
-        (async () => {
-            const getProductDetail = () => {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve(productosData.find(p => p.id === parseInt(productId)));
-                    }, 1000);
-                })
-            }
-
-            const productoData = await getProductDetail();
-            
-            if (productoData) {
-                SetProduct(productoData);
-            }
-        })()
-        */
     }, [productId]);
 
     // Funcion para el contador
@@ -49,13 +50,12 @@ const ProductItemDetail = () => {
     }
 
     return (
-        <>
-            <div>Product Detalle - {productId}</div>
-            <strong className="p-2">{product.id}</strong>
-            <strong className="p-2">{product.name}</strong>
-            <strong className="p-2">{product.description}</strong>
+        <div style={{width: "300px", textAlign: "center", margin: "auto", marginTop: "20px"}}>
+            {product.imageUrl != null ? <img src={componentsImages("./" + product.imageUrl)} alt="Shoes" style={styleImage}/> : ""}
+            <h1 style={styleTitleProduct} className="p-2">{product.name}</h1>
+            <p style={styleDescriptionProduct} className="p-2">{product.description}</p>
             { countProducts === 0 ? <ItemCount stock={10} initial={1} onAdd={onAdd}></ItemCount> : <Link to="/cart">Ver Carrito</Link> }
-        </>
+        </div>
     )
 }
-export default ProductItemDetail
+export default ProductItemDetail;
