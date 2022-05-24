@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { productos as productosData } from "../data/productos";
+import { GetPeripherals } from "../data/firebase/firebase";
 
 import ProductItemList from './ProductItemList';
 
@@ -17,7 +17,7 @@ let styleTitle = {
 
 const ProductItemListContainer = () => {
     const { categoryId } = useParams()
-    const [peripherals, SetPerispherals] = useState([]);
+    const [peripherals, SetPeripherals] = useState([]);
 
     let titleProducts;
     switch (categoryId != null ? categoryId.toString() : "") {
@@ -33,16 +33,8 @@ const ProductItemListContainer = () => {
     }
 
     useEffect(() => {
-        const GetPerispherals = new Promise((resolve, reject) => {
-            resolve(productosData);
-        });
-
-        GetPerispherals.then((result) => {
-            if (categoryId != null) {
-                SetPerispherals(result.filter(item => item.categoryId === categoryId));
-            } else {
-                SetPerispherals(result);
-            }
+        GetPeripherals(null, categoryId).then((result) => {
+            SetPeripherals(result);
         });
     }, [categoryId]);
     

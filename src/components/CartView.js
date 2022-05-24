@@ -14,7 +14,7 @@ export default function CartView() {
                 {
                     cart.map((item) => 
                         <tr key={item.id}>
-                            <td><img src={componentsImages("./" + item.urlImage)} alt="Shoes"/></td>
+                            <td><img src={componentsImages("./" + item.imageUrl)} alt="Shoes"/></td>
                             <td>
                                 {item.description}
                                 <br/>

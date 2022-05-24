@@ -8,7 +8,7 @@ let styleListItem = {
 const ProductItemList = (props) => {
     return (
         <div style={styleListItem}>
-            {props.items.map((item) => <ProductItem key={item.id} idComponent={item.id} name={item.name} price={item.price} urlImage={item.urlImage}></ProductItem> )}
+            {props.items.map((item) => <ProductItem key={item.id} idComponent={item.id} name={item.name} price={item.price} imageUrl={item.imageUrl}></ProductItem> )}
         </div>
     );
 };

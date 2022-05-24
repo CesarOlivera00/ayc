@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { productos as productosData } from "../data/productos";
-
 import ItemCount from './ItemCount';
 import { useContext } from 'react';
+import { GetPeripherals } from "../data/firebase/firebase";
 import CartContext from '../context/CartContext';
 
 const ProductItemDetail = () => {
@@ -14,6 +13,16 @@ const ProductItemDetail = () => {
     const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
+        setTimeout(() => {
+            GetPeripherals(productId, null).then((result) => {
+                if (result.length == 1) {
+                    SetProduct(result[0]);
+                } else {
+                    // Mostrar algun error.
+                }
+            });
+        }, 1000);
+        /*
         (async () => {
             const getProductDetail = () => {
                 return new Promise((resolve) => {
@@ -29,6 +38,7 @@ const ProductItemDetail = () => {
                 SetProduct(productoData);
             }
         })()
+        */
     }, [productId]);
 
     // Funcion para el contador
@@ -44,9 +54,6 @@ const ProductItemDetail = () => {
             <strong className="p-2">{product.id}</strong>
             <strong className="p-2">{product.name}</strong>
             <strong className="p-2">{product.description}</strong>
-            <div className="m-5">
-                <Link to='/product/1'>Perisferico</Link>
-            </div>
             { countProducts === 0 ? <ItemCount stock={10} initial={1} onAdd={onAdd}></ItemCount> : <Link to="/cart">Ver Carrito</Link> }
         </>
     )
