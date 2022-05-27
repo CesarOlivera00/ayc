@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import ItemCount from './ItemCount';
 import { useContext } from 'react';
-import { GetPeripherals } from "../data/firebase/firebase";
+import { GetPeripheralById } from "../data/firebase/firebase";
 import CartContext from '../context/CartContext';
 
 let styleTitleProduct = {
@@ -32,7 +32,7 @@ const ProductItemDetail = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            GetPeripherals(productId, null).then((result) => {
+            GetPeripheralById(productId).then((result) => {
                 if (result.length == 1) {
                     SetProduct(result[0]);
                 } else {
@@ -50,12 +50,16 @@ const ProductItemDetail = () => {
     }
 
     return (
-        <div style={{width: "300px", textAlign: "center", margin: "auto", marginTop: "20px"}}>
-            {product.imageUrl != null ? <img src={componentsImages("./" + product.imageUrl)} alt="Shoes" style={styleImage}/> : ""}
-            <h1 style={styleTitleProduct} className="p-2">{product.name}</h1>
-            <p style={styleDescriptionProduct} className="p-2">{product.description}</p>
-            { countProducts === 0 ? <ItemCount stock={10} initial={1} onAdd={onAdd}></ItemCount> : <Link to="/cart">Ver Carrito</Link> }
-        </div>
+        product.id != null ?
+            <div style={{width: "300px", textAlign: "center", margin: "auto", marginTop: "20px"}}>
+                {product.imageUrl != null ? <img src={componentsImages("./" + product.imageUrl)} alt="Shoes" style={styleImage}/> : ""}
+                <h1 style={styleTitleProduct} className="p-2">{product.name}</h1>
+                <p style={styleDescriptionProduct} className="p-2">{product.description}</p>
+                { countProducts === 0 ? <ItemCount stock={10} initial={1} onAdd={onAdd}></ItemCount> : <Link to="/cart">Ver Carrito</Link> }
+            </div>
+        :
+            <h2 style={{marginTop: "30px", color: "gray", fontSize: "25px", textAlign: "center"}}>Cargando...</h2>
     )
 }
+
 export default ProductItemDetail;

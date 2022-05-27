@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { GetPeripherals } from "../data/firebase/firebase";
+import { GetAllPeripherals, GetPeripheralsByCategoryId } from "../data/firebase/firebase";
 
 import ProductItemList from './ProductItemList';
 
@@ -33,9 +33,15 @@ const ProductItemListContainer = () => {
     }
 
     useEffect(() => {
-        GetPeripherals(null, categoryId).then((result) => {
-            SetPeripherals(result);
-        });
+        if (categoryId != null) {
+            GetPeripheralsByCategoryId(categoryId).then((result) => {
+                SetPeripherals(result);
+            });
+        } else {
+            GetAllPeripherals(categoryId).then((result) => {
+                SetPeripherals(result);
+            });
+        }
     }, [categoryId]);
     
     return (
