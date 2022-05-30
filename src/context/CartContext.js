@@ -25,12 +25,9 @@ export function CartContextProvider({children}) {
     };
 
     const deleteItemCart = (id) => {
-        let index = cart.indexOf(cart.filter(x => x.id == id)[0]);
-        if (index >= 0) {
-            let newArray = cart;
-            newArray.splice(index, 1);
-            setCart(newArray);
-        }
+        const newCart = [...cart];
+        const cartFilter = newCart.filter(item => { return item.id != id });
+        setCart(cartFilter);
     };
 
     const clearCart = () => {

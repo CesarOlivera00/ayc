@@ -30,11 +30,13 @@ const ProductItemDetail = () => {
 
     const { addToCart } = useContext(CartContext);
 
+    console.log(productId);
+
     useEffect(() => {
         setTimeout(() => {
             GetPeripheralById(productId).then((result) => {
-                if (result.length == 1) {
-                    SetProduct(result[0]);
+                if (result != null) {
+                    SetProduct(result);
                 } else {
                     // Mostrar algun error.
                 }

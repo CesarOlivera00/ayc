@@ -23,8 +23,7 @@ let styleButtonDelete = {
 
 export default function CartView() {
     const [orderDone, setOrderDone] = useState(false);
-    const { cart } = useContext(CartContext);
-    const { deleteItemCart, getTotalPrice, clearCart } = useContext(CartContext);
+    const { cart, deleteItemCart, getTotalPrice, clearCart } = useContext(CartContext);
 
     function handleBuy() {
         const buyOrder = {
@@ -59,7 +58,7 @@ export default function CartView() {
                                         <strong>${item.price}</strong>
                                     </td>
                                     <td><strong>x{item.cant}</strong></td>
-                                    <td><button className="btn" style={styleButtonDelete} onClick={() => { deleteItemCart(item.id); }}>Eliminar</button></td>
+                                    <td><button className="btn" style={styleButtonDelete} onClick={() => deleteItemCart(item.id)}>Eliminar</button></td>
                                 </tr>
                             )
                         }

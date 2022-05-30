@@ -16,6 +16,7 @@ const TopNavBar = (props) => {
                         <li style={{margin: "5px 10px"}}><Link to="/category/1">Teclados</Link></li>
                         <li style={{margin: "5px 10px"}}><Link to="/category/2">Mouses</Link></li>
                         <li style={{margin: "5px 10px"}}><Link to="/cart">Ver Carrito</Link></li>
+                        <li style={{margin: "5px 10px"}}><Link to="/orders">Ver Ordenes</Link></li>
                     </ul>
                 </div>
                 

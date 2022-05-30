@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
-import { buildQueries } from "@testing-library/react";
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore, setDoc, addDoc, Timestamp, query, where } from "firebase/firestore/lite";
+import { collection, getDocs, getDoc, getFirestore, addDoc, doc, Timestamp, query, where } from "firebase/firestore/lite";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -28,32 +27,30 @@ export default firestoreDB;
 
 export async function GetAllPeripherals() {
     const peripheralCollection = collection(firestoreDB, PERIPHERALS);
-    const getPeripheralDocs = await getDocs(peripheralCollection);
+    const peripheralDocs = await getDocs(peripheralCollection);
 
-    let peripheralArray = getPeripheralDocs.docs.map(doc => doc.data());
+    let peripheralArray = peripheralDocs.docs.map(doc => ({id: doc.id, ...doc.data()}));
 
     return peripheralArray;
 }
 
 export async function GetPeripheralById(productId = null) {
     const peripheralCollection = collection(firestoreDB, PERIPHERALS);
-    const queryFB = query(peripheralCollection, where("id", "==", parseInt(productId)))
-    const getPeripheralDocs = await getDocs(queryFB);
+    const peripheralRef = doc(peripheralCollection, productId);
+    const peripheralDoc = await getDoc(peripheralRef);
 
-    let peripheralArray = getPeripheralDocs.docs.map(doc => doc.data());
+    let peripheral = {id: peripheralDoc.id, ...peripheralDoc.data()};
 
-    return peripheralArray;
+    return peripheral;
 }
 
 export async function GetPeripheralsByCategoryId(categoryId = null) {
-    console.log("categoria: ");
-    console.log(categoryId);
     const peripheralCollection = collection(firestoreDB, PERIPHERALS);
     
     const queryFB = query(peripheralCollection, where("categoryId", "==", parseInt(categoryId)))
-    const getPeripheralDocs = await getDocs(queryFB);
+    const peripheralDocs = await getDocs(queryFB);
 
-    let peripheralArray = getPeripheralDocs.docs.map(doc => doc.data());
+    let peripheralArray = peripheralDocs.docs.map(doc => ({id: doc.id, ...doc.data()}));
     console.log(peripheralArray);
 
     return peripheralArray;
@@ -64,4 +61,38 @@ export async function CreateBuyOrder(orderData) {
     
     const buyOrderCollection = collection(firestoreDB, BUY_ORDERS);
     const orderDoc = await addDoc(buyOrderCollection, orderWithDate);
+}
+
+export async function GetAllOrders() {
+    const orderCollection = collection(firestoreDB, BUY_ORDERS);
+    const orderDocs = await getDocs(orderCollection);
+
+    let orderArray = orderDocs.docs.map(doc => ({id: doc.id, ...doc.data()}));
+    
+    for (let i = 0; i < orderArray.length; i++) {
+        orderArray[i].date = (orderArray[i].date).toDate();
+    }
+
+    orderArray.sort(function (a, b) {
+        if (a.date < b.date) {
+          return 1;
+        }
+        if (a.date > b.date) {
+          return -1;
+        }
+        return 0;
+      });
+
+    return orderArray;
+}
+
+export async function GetOrderById(orderId = null) {
+    const orderCollection = collection(firestoreDB, BUY_ORDERS);
+    const orderRef = doc(orderCollection, orderId);
+    const orderDoc = await getDoc(orderRef);
+
+    let order = {id: orderDoc.id, ...orderDoc.data()};
+    order.date = order.date.toDate();
+
+    return order;
 }
